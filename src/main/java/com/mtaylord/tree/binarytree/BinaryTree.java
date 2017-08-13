@@ -17,13 +17,23 @@ public class BinaryTree<T> {
         Iterator<T> iterator;
         switch (treeTraversal) {
             case POSTORDER:
+                iterator = BinaryTreeIterator.postOrderIterator(this);
+                break;
             case PREORDER:
+                iterator = BinaryTreeIterator.preOrderIterator(this);
+                break;
             case INORDER:
+                iterator = BinaryTreeIterator.inOrderIterator(this);
+                break;
             default:
-                iterator = new InOrderBinaryTreeIterator<>(root);
+                iterator = BinaryTreeIterator.inOrderIterator(this);
         }
         iterator.forEachRemaining(list::add);
         return list;
+    }
+
+    public List<T> traverse() {
+        return traverse(TreeTraversal.INORDER);
     }
 
     public BinaryTreeNode<T> getRoot() {

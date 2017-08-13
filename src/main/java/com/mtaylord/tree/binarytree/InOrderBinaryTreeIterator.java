@@ -2,35 +2,33 @@ package com.mtaylord.tree.binarytree;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Iterator;
 
-public class InOrderBinaryTreeIterator<T> implements Iterator<T> {
+public class InOrderBinaryTreeIterator<T> extends BinaryTreeIterator<T> {
 
-    private final Deque<BinaryTreeNode<T>> deque = new ArrayDeque<>();
-    private BinaryTreeNode<T> current;
+    private final Deque<BinaryTreeNode<T>> stack = new ArrayDeque<>();
 
-    public InOrderBinaryTreeIterator(BinaryTreeNode<T> current) {
-        this.current = current;
+    public InOrderBinaryTreeIterator(final BinaryTreeNode<T> current) {
+        super(current);
         updateCurrent();
     }
 
     @Override
     public boolean hasNext() {
-        return this.current == null && !deque.isEmpty();
+        return isCurrentNull() && !stack.isEmpty();
     }
 
     @Override
     public T next() {
-        BinaryTreeNode<T> node = deque.pop();
-        this.current = node.getRight();
+        BinaryTreeNode<T> node = stack.pop();
+        setCurrent(node.getRight());
         updateCurrent();
         return node.getVal();
     }
 
     private void updateCurrent() {
-        while (this.current != null) {
-            deque.push(current);
-            this.current = this.current.getLeft();
+        while (!isCurrentNull()) {
+            stack.push(getCurrent());
+            setCurrent(this.getCurrent().getLeft());
         }
     }
 

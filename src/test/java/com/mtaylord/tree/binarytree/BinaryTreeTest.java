@@ -20,7 +20,7 @@ public class BinaryTreeTest {
     @Test
     public void inorderIterator() throws Exception {
         BinaryTree<Integer> binaryTree = BinaryTreeTestUtils.generateShallowBalancedBST(1, 2, 3);
-        Iterator<Integer> iterator = new InOrderBinaryTreeIterator<>(binaryTree.getRoot());
+        Iterator<Integer> iterator = BinaryTreeIterator.inOrderIterator(binaryTree);
 
         assertTrue(iterator.hasNext());
 
@@ -41,9 +41,60 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void inOrderIterator_toString() throws Exception {
+    public void traverseInOrder() throws Exception {
         BinaryTree<Integer> binaryTree = BinaryTreeTestUtils.generateBinaryTree();
         assertEquals(binaryTree.traverse(TreeTraversal.INORDER), Arrays.asList(4, 2, 5, 1, 3));
     }
+
+    @Test
+    public void postOrderIterator() throws Exception {
+        Iterator<Integer> iterator = BinaryTreeIterator.postOrderIterator(BinaryTreeTestUtils.generateBinaryTree());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(4), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(5), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(2), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(3), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(1), iterator.next());
+
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void traversePostOrder() throws Exception {
+        BinaryTree<Integer> binaryTree = BinaryTreeTestUtils.generateBinaryTree();
+        assertEquals(binaryTree.traverse(TreeTraversal.POSTORDER), Arrays.asList(4, 5, 2, 3, 1));
+    }
+
+    @Test
+    public void preOrderIterator() throws Exception {
+        Iterator<Integer> iterator = BinaryTreeIterator.preOrderIterator(BinaryTreeTestUtils.generateBinaryTree());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(1), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(2), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(4), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(5), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(3), iterator.next());
+
+        assertFalse(iterator.hasNext());
+    }
+
 
 }
