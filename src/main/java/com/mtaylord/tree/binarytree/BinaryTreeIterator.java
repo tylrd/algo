@@ -17,6 +17,10 @@ public abstract class BinaryTreeIterator<T> implements Iterator<T> {
         return new PreOrderBinaryTreeIterator<>(binaryTree.getRoot());
     }
 
+    public static <T> Iterator<T> levelOrderIterator(BinaryTree<T> binaryTree) {
+        return new LevelOrderBinaryTreeIterator<>(binaryTree.getRoot());
+    }
+
     private BinaryTreeNode<T> current;
 
     public BinaryTreeIterator(BinaryTreeNode<T> current) {

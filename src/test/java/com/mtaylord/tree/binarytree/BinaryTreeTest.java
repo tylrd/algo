@@ -43,11 +43,11 @@ public class BinaryTreeTest {
     @Test
     public void traverseInOrder() throws Exception {
         BinaryTree<Integer> binaryTree = BinaryTreeTestUtils.generateBinaryTree();
-        assertEquals(binaryTree.traverse(TreeTraversal.INORDER), Arrays.asList(4, 2, 5, 1, 3));
+        assertEquals(binaryTree.traverse(TraversalOrder.IN), Arrays.asList(4, 2, 5, 1, 3));
     }
 
     @Test
-    public void postOrderIterator() throws Exception {
+    public void postOrderIterator_doubleStack() throws Exception {
         Iterator<Integer> iterator = BinaryTreeIterator.postOrderIterator(BinaryTreeTestUtils.generateBinaryTree());
 
         assertTrue(iterator.hasNext());
@@ -69,9 +69,70 @@ public class BinaryTreeTest {
     }
 
     @Test
+    public void postOrderIterator_singleStack() throws Exception {
+        Iterator<Integer> iterator = new PostOrderBinaryTreeIteratorSingleStack<>(
+                BinaryTreeTestUtils.generateBinaryTree()
+                                   .getRoot());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(4), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(5), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(2), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(3), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(1), iterator.next());
+
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void postOrderIterator_singleStack_deeplyNested() throws Exception {
+        Iterator<Integer> iterator = new PostOrderBinaryTreeIteratorSingleStack<>(
+                BinaryTreeTestUtils.generateDeepBinaryTree()
+                                   .getRoot());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(4), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(9), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(5), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(2), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(8), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(6), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(7), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(3), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(1), iterator.next());
+
+        assertFalse(iterator.hasNext());
+    }
+
+
+    @Test
     public void traversePostOrder() throws Exception {
         BinaryTree<Integer> binaryTree = BinaryTreeTestUtils.generateBinaryTree();
-        assertEquals(binaryTree.traverse(TreeTraversal.POSTORDER), Arrays.asList(4, 5, 2, 3, 1));
+        assertEquals(binaryTree.traverse(TraversalOrder.POST), Arrays.asList(4, 5, 2, 3, 1));
     }
 
     @Test
@@ -92,6 +153,28 @@ public class BinaryTreeTest {
 
         assertTrue(iterator.hasNext());
         assertEquals(new Integer(3), iterator.next());
+
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void levelOrderIterator() throws Exception {
+        Iterator<Integer> iterator = BinaryTreeIterator.levelOrderIterator(BinaryTreeTestUtils.generateBinaryTree());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(1), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(2), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(3), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(4), iterator.next());
+
+        assertTrue(iterator.hasNext());
+        assertEquals(new Integer(5), iterator.next());
 
         assertFalse(iterator.hasNext());
     }

@@ -7,7 +7,7 @@ public class PreOrderBinaryTreeIterator<T> extends BinaryTreeIterator<T> {
 
     private final Deque<BinaryTreeNode<T>> stack = new ArrayDeque<>();
 
-    public PreOrderBinaryTreeIterator(final BinaryTreeNode<T> current) {
+    PreOrderBinaryTreeIterator(final BinaryTreeNode<T> current) {
         super(current);
         stack.push(current);
     }

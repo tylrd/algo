@@ -13,11 +13,11 @@ public class BinaryTreeTestUtils {
     }
 
     /**
-     * 1
-     * / \
-     * 2  3
-     * /\
-     * 4 5
+     *     1
+     *    / \
+     *   2  3
+     *  / \
+     * 4  5
      *
      * @return
      */
@@ -41,6 +41,45 @@ public class BinaryTreeTestUtils {
         left10.setLeft(left21);
         left10.setRight(right21);
 
+        return new BinaryTree<>(root0);
+    }
+
+    public static BinaryTree<Integer> generateDeepBinaryTree() {
+        BinaryTreeNode<Integer> root0 = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> leftA = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> rightB = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> leftAA = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> rightAA = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> leftBB = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> rightBB = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> leftBBB = new BinaryTreeNode<>();
+        BinaryTreeNode<Integer> rightAAA = new BinaryTreeNode<>();
+
+        root0.setVal(1);
+        leftA.setVal(2);
+        rightB.setVal(3);
+
+        leftAA.setVal(4);
+        rightAA.setVal(5);
+
+        leftBB.setVal(6);
+        rightBB.setVal(7);
+
+        leftBBB.setVal(8);
+        rightAAA.setVal(9);
+
+        root0.setLeft(leftA);
+        root0.setRight(rightB);
+
+        leftA.setLeft(leftAA);
+        leftA.setRight(rightAA);
+
+        rightAA.setRight(rightAAA);
+
+        rightB.setLeft(leftBB);
+        rightB.setRight(rightBB);
+
+        leftBB.setLeft(leftBBB);
         return new BinaryTree<>(root0);
     }
 

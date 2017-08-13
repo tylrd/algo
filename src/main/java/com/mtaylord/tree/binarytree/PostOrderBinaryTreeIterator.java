@@ -1,7 +1,7 @@
 package com.mtaylord.tree.binarytree;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
 /**
  * Post order traversal for a binary tree
@@ -12,33 +12,32 @@ import java.util.LinkedList;
  */
 public class PostOrderBinaryTreeIterator<T> extends BinaryTreeIterator<T> {
 
-    private final Deque<BinaryTreeNode<T>> stack1 = new LinkedList<>();
-    private final Deque<BinaryTreeNode<T>> stack2 = new LinkedList<>();
+    private final Deque<BinaryTreeNode<T>> stack = new ArrayDeque<>();
 
-
-    public PostOrderBinaryTreeIterator(final BinaryTreeNode<T> current) {
+    PostOrderBinaryTreeIterator(final BinaryTreeNode<T> current) {
         super(current);
-        stack1.push(current);
-        while (!stack1.isEmpty()) {
-            BinaryTreeNode<T> node = stack1.pop();
-            stack2.push(node);
+        final Deque<BinaryTreeNode<T>> tempStack = new ArrayDeque<>();
+        tempStack.push(current);
+        while (!tempStack.isEmpty()) {
+            BinaryTreeNode<T> node = tempStack.pop();
+            stack.push(node);
             if (node.getLeft() != null) {
-                stack1.push(node.getLeft());
+                tempStack.push(node.getLeft());
             }
             if (node.getRight() != null) {
-                stack1.push(node.getRight());
+                tempStack.push(node.getRight());
             }
         }
     }
 
     @Override
     public boolean hasNext() {
-        return !stack2.isEmpty();
+        return !stack.isEmpty();
     }
 
     @Override
     public T next() {
-        BinaryTreeNode<T> node = stack2.pop();
+        BinaryTreeNode<T> node = stack.pop();
         return node != null ? node.getVal() : null;
     }
 }

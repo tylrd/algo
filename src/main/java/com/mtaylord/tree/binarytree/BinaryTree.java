@@ -12,18 +12,21 @@ public class BinaryTree<T> {
         this.root = root;
     }
 
-    public List<T> traverse(TreeTraversal treeTraversal) {
-        List<T> list = new ArrayList<>();
+    public List<T> traverse(TraversalOrder order) {
+        final List<T> list = new ArrayList<>();
         Iterator<T> iterator;
-        switch (treeTraversal) {
-            case POSTORDER:
+        switch (order) {
+            case POST:
                 iterator = BinaryTreeIterator.postOrderIterator(this);
                 break;
-            case PREORDER:
+            case PRE:
                 iterator = BinaryTreeIterator.preOrderIterator(this);
                 break;
-            case INORDER:
+            case IN:
                 iterator = BinaryTreeIterator.inOrderIterator(this);
+                break;
+            case LEVEL:
+                iterator = BinaryTreeIterator.levelOrderIterator(this);
                 break;
             default:
                 iterator = BinaryTreeIterator.inOrderIterator(this);
@@ -33,7 +36,7 @@ public class BinaryTree<T> {
     }
 
     public List<T> traverse() {
-        return traverse(TreeTraversal.INORDER);
+        return traverse(TraversalOrder.IN);
     }
 
     public BinaryTreeNode<T> getRoot() {
